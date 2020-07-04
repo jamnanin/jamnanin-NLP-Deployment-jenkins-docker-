@@ -1,4 +1,4 @@
-FROM frolvlad/alpine-python-machinelearning:latesh
+FROM frolvlad/alpine-python-machinelearning:latest
 RUN pip install --upgrade pip
 
 WORKDIR /app
