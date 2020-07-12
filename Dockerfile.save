@@ -1,0 +1,37 @@
+FROM frolvlad/alpine-python-machinelearning:latest
+RUN pip install --upgrade pip
+
+WORKDIR /app
+
+COPY . /app
+RUN pip install -r requirements.txt
+
+RUN python -m nltk.downloader punkt
+
+EXPOSE 4000
+
+ENTRYPOINT ['python']
+
+CMD ['app.py']
+
+FROM frolvlad/alpine-python-machinelearning:latest
+RUN pip install --upgrade pip
+
+
+WORKDIR /app
+
+COPY . /app
+RUN apk --update add --virtual build-dependencies libffi-dev openssl-dev python3-dev python-dev py-pip build-base \
+&& pip install --upgrade pip \
+&& pip install --no-cache-dir -r requirements.txt \
+&& apk del build-dependencies
+
+RUN python -m nltk.downloader punkt
+
+EXPOSE 4000
+
+ENTRYPOINT ['python']
+
+CMD ['app.py']
+
+You can copy past this code in your current docker file

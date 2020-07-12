@@ -1,2 +1,4 @@
 nltk
 flask
+sklearn
+pandas
